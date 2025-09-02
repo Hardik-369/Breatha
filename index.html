@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breatha - Be Cigarette Free</title>
+    
+    <!-- Favicon using FontAwesome lung icon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 640 512%22><path fill=%22%23003049%22 d=%22M320 96c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32zm112 80c0-35.3-28.7-64-64-64s-64 28.7-64 64l0 48c0 35.3 28.7 64 64 64s64-28.7 64-64l0-48zm-224 0c0-35.3-28.7-64-64-64s-64 28.7-64 64l0 48c0 35.3 28.7 64 64 64s64-28.7 64-64l0-48zM96 192l0 192c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-80 0 0 48c0 53-43 96-96 96s-96-43-96-96l0-48-80 0c-35.3 0-64 28.7-64 64z%22/></svg>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <script>
+        // Configure Tailwind with new green, black, white theme
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-green': '#22c55e',
+                        'dark-green': '#16a34a',
+                        'light-green': '#4ade80',
+                        'success-green': '#10b981',
+                        'emerald': '#059669',
+                        'forest': '#15803d',
+                        'mint': '#6ee7b7'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+        }
+        
+        .gradient-bg {
+            background: #22c55e;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .badge-glow {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.6);
+            background: #22c55e;
+        }
+        
+        .level-progress {
+            background: #22c55e;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(34, 197, 94, 0.2);
+            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.1);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+        
+        .level-card {
+            background: #22c55e;
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.3);
+        }
+        
+        .quote-card {
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(34, 197, 94, 0.1);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+        
+        .milestone-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .milestone-item:hover {
+            transform: translateX(8px);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .floating-badge {
+            animation: float-badge 3s ease-in-out infinite;
+        }
+        
+        @keyframes float-badge {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-5px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        }
+        
+        .achievement-card {
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .landing-bg {
+            background: #000000;
+        }
+        
+        .setup-bg {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+    <!-- Animated Background Particles -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-10 left-10 w-4 h-4 bg-primary-green rounded-full opacity-20 animate-pulse"></div>
+        <div class="absolute top-32 right-20 w-6 h-6 bg-white rounded-full opacity-30 animate-bounce"></div>
+        <div class="absolute bottom-20 left-20 w-3 h-3 bg-success-green rounded-full opacity-25 floating"></div>
+        <div class="absolute bottom-40 right-10 w-5 h-5 bg-light-green rounded-full opacity-20 pulse-animation"></div>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-bg min-h-screen flex items-center justify-center relative">
+        <div class="text-center px-6 max-w-4xl mx-auto">
+            <!-- Hero Section -->
+            <div class="mb-12">
+                <div class="floating mb-8">
+                    <i class="fas fa-lungs text-8xl text-primary-green drop-shadow-2xl mb-4"></i>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-2xl">
+                    🌱 Breatha
+                </h1>
+                <p class="text-2xl md:text-3xl text-primary-green mb-4 font-medium">
+                    Your Gamified Journey to Freedom
+                </p>
+                <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Transform your smoking cessation journey into an engaging game. Track progress, earn achievements, and celebrate every smoke-free moment! 🎮✨
+                </p>
+            </div>
+            
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="glass-effect rounded-2xl p-6 text-center transform hover:scale-105 transition-all">
+                    <i class="fas fa-trophy text-4xl text-primary-green mb-4"></i>
+                    <h3 class="text-xl font-bold text-black mb-2">🏆 Achievements</h3>
+                    <p class="text-gray-700">Unlock badges and level up as you progress</p>
+                </div>
+                <div class="glass-effect rounded-2xl p-6 text-center transform hover:scale-105 transition-all">
+                    <i class="fas fa-chart-line text-4xl text-primary-green mb-4"></i>
+                    <h3 class="text-xl font-bold text-black mb-2">📊 Progress Tracking</h3>
+                    <p class="text-gray-700">Monitor your health & financial improvements</p>
+                </div>
+                <div class="glass-effect rounded-2xl p-6 text-center transform hover:scale-105 transition-all">
+                    <i class="fas fa-heart text-4xl text-primary-green mb-4"></i>
+                    <h3 class="text-xl font-bold text-black mb-2">💚 Health Recovery</h3>
+                    <p class="text-gray-700">Watch your body heal with every passing day</p>
+                </div>
+            </div>
+            
+            <!-- CTA Button -->
+            <button id="startJourneyBtn" class="bg-primary-green hover:bg-dark-green text-white font-bold py-6 px-12 rounded-full text-2xl transition-all duration-300 transform hover:scale-110 pulse-animation neon-glow shadow-2xl">
+                <i class="fas fa-rocket mr-4"></i>🚭 Be Cigarette Free
+            </button>
+            
+            <!-- Stats Preview -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-green">💪 Health</div>
+                    <div class="text-sm text-gray-300">Instant Recovery</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-green">💰 Money</div>
+                    <div class="text-sm text-gray-300">Save Every Day</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-green">🎯 Goals</div>
+                    <div class="text-sm text-gray-300">Achieve Milestones</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setup Wizard -->
+    <div id="setupWizard" class="fixed inset-0 setup-bg hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-effect rounded-3xl p-8 max-w-md w-full transform scale-100 transition-all">
+            <div class="text-center mb-8">
+                <i class="fas fa-clipboard-list text-5xl text-primary-green mb-4"></i>
+                <h2 class="text-3xl font-bold text-black mb-2">📋 Quick Setup</h2>
+                <p class="text-gray-700">Help us personalize your journey</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-lg font-semibold text-black mb-3 flex items-center">
+                        <i class="fas fa-smoking text-primary-green mr-3"></i>
+                        🚬 Cigarettes per day
+                    </label>
+                    <input type="number" id="setupCigarettesPerDay" class="w-full p-4 border-2 border-primary-green/30 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white text-black text-lg" placeholder="e.g., 20" min="1">
+                </div>
+                
+                <div>
+                    <label class="block text-lg font-semibold text-black mb-3 flex items-center">
+                        <i class="fas fa-rupee-sign text-primary-green mr-3"></i>
+                        💰 Cost per pack (₹)
+                    </label>
+                    <input type="number" id="setupCostPerPack" class="w-full p-4 border-2 border-primary-green/30 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white text-black text-lg" placeholder="e.g., 150" min="1">
+                </div>
+                
+                <div>
+                    <label class="block text-lg font-semibold text-black mb-3 flex items-center">
+                        <i class="fas fa-box text-primary-green mr-3"></i>
+                        📦 Cigarettes per pack
+                    </label>
+                    <input type="number" id="setupCigarettesPerPack" class="w-full p-4 border-2 border-primary-green/30 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white text-black text-lg" placeholder="e.g., 20" min="1">
+                </div>
+                
+                <div>
+                    <label class="block text-lg font-semibold text-black mb-3 flex items-center">
+                        <i class="fas fa-calendar-alt text-primary-green mr-3"></i>
+                        🎯 Years smoking
+                    </label>
+                    <input type="number" id="setupYearsSmoking" class="w-full p-4 border-2 border-primary-green/30 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white text-black text-lg" placeholder="e.g., 5" min="1">
+                </div>
+                
+                <div>
+                    <label class="block text-lg font-semibold text-black mb-3 flex items-center">
+                        <i class="fas fa-user text-primary-green mr-3"></i>
+                        👤 Your name (optional)
+                    </label>
+                    <input type="text" id="setupUserName" class="w-full p-4 border-2 border-primary-green/30 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white text-black text-lg" placeholder="e.g., Alex">
+                </div>
+            </div>
+            
+            <div class="mt-8 space-y-4">
+                <button id="completeSetup" class="w-full bg-primary-green hover:bg-dark-green text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-lg">
+                    <i class="fas fa-rocket mr-3"></i>🚀 Start My Journey!
+                </button>
+                <button id="cancelSetup" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 text-lg">
+                    <i class="fas fa-times mr-3"></i>❌ Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="gradient-bg text-white p-4 shadow-2xl relative z-10 neon-glow hidden">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-lungs text-3xl text-white drop-shadow-lg"></i>
+                <h1 class="text-2xl font-bold tracking-wide">🌱 Breatha</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span id="welcomeUser" class="text-lg font-medium"></span>
+                <button id="settingsBtn" class="text-white hover:text-primary-green transition-all duration-300 transform hover:scale-110">
+                    <i class="fas fa-cog text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="app" class="container mx-auto px-4 py-6">
+        
+        <!-- Welcome Screen (Hidden by default since we have landing page) -->
+        <div id="welcomeScreen" class="text-center py-12 relative z-10 hidden">
+            <div class="floating mb-8">
+                <div class="relative">
+                    <i class="fas fa-lungs text-8xl text-white drop-shadow-2xl"></i>
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-primary-green rounded-full animate-ping"></div>
+                </div>
+            </div>
+            <h2 class="text-5xl font-bold text-white mb-4 drop-shadow-lg">Welcome to Breatha</h2>
+            <p class="text-xl text-primary-green mb-8 drop-shadow">Your gamified journey to a smoke-free life starts here</p>
+            <button id="oldStartJourneyBtn" class="bg-primary-green hover:bg-dark-green text-white font-bold py-5 px-10 rounded-full text-xl transition-all duration-300 transform hover:scale-110 pulse-animation neon-glow">
+                <i class="fas fa-rocket mr-3"></i>Be Cigarette Free
+            </button>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="hidden relative z-10 pb-8">
+            <!-- Hero Progress Section -->
+            <div class="level-card rounded-3xl p-8 mb-8 text-white relative overflow-hidden">
+                <div class="absolute top-4 right-4 opacity-20">
+                    <i class="fas fa-trophy text-6xl"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+                        <div class="mb-4 md:mb-0">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-crown text-yellow-300 mr-3 text-2xl floating-badge"></i>
+                                <h2 class="text-3xl md:text-4xl font-bold">
+                                    Level <span id="userLevel">1</span>
+                                </h2>
+                            </div>
+                            <p class="text-green-100 text-lg">🏆 Smoke-Free Champion</p>
+                            <p class="text-green-200 text-sm mt-1">✨ <span id="levelXP">0</span> / <span id="levelXPRequired">100</span> XP to next level</p>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <div class="relative inline-block">
+                                <svg class="progress-ring w-24 h-24 md:w-32 md:h-32" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="8"/>
+                                    <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#fef08a" stroke-width="8" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283"/>
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                    <div class="text-2xl md:text-4xl font-bold" id="streakDays">0</div>
+                                    <div class="text-xs md:text-sm text-green-200">Days</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-black/20 rounded-full h-3 mb-4">
+                        <div id="levelProgress" class="bg-yellow-400 h-3 rounded-full progress-bar shadow-lg" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Dashboard Grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+                <!-- Days Smoke-Free -->
+                <div class="stat-card rounded-2xl p-4 md:p-6 text-center group cursor-pointer">
+                    <div class="bg-primary-green w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-calendar-check text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <div class="text-2xl md:text-3xl font-bold text-black mb-1" id="daysFree">0</div>
+                    <div class="text-xs md:text-sm text-gray-600">📅 Days Free</div>
+                </div>
+                
+                <!-- Cigarettes Avoided -->
+                <div class="stat-card rounded-2xl p-4 md:p-6 text-center group cursor-pointer">
+                    <div class="bg-red-500 w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-ban text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <div class="text-2xl md:text-3xl font-bold text-black mb-1" id="cigarettesAvoided">0</div>
+                    <div class="text-xs md:text-sm text-gray-600">🚫 Avoided</div>
+                </div>
+                
+                <!-- Money Saved -->
+                <div class="stat-card rounded-2xl p-4 md:p-6 text-center group cursor-pointer">
+                    <div class="bg-emerald w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-rupee-sign text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <div class="text-xl md:text-3xl font-bold text-black mb-1">₹<span id="moneySaved">0</span></div>
+                    <div class="text-xs md:text-sm text-gray-600">💰 Saved</div>
+                </div>
+                
+                <!-- Health Score -->
+                <div class="stat-card rounded-2xl p-4 md:p-6 text-center group cursor-pointer">
+                    <div class="bg-pink-500 w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform pulse-animation">
+                        <i class="fas fa-heart text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <div class="text-2xl md:text-3xl font-bold text-black mb-1" id="healthScore">100</div>
+                    <div class="text-xs md:text-sm text-gray-600">❤️ Health</div>
+                </div>
+            </div>
+
+            <!-- Motivational Quote Section -->
+            <div class="quote-card rounded-3xl p-6 md:p-8 mb-8 text-white text-center relative">
+                <div class="relative z-10">
+                    <div class="mb-4">
+                        <i class="fas fa-quote-left text-2xl md:text-3xl mb-4 opacity-80"></i>
+                    </div>
+                    <p id="motivationalQuote" class="text-lg md:text-xl font-medium mb-4 leading-relaxed max-w-3xl mx-auto">Every day smoke-free is a victory! 🎆</p>
+                    <div class="flex items-center justify-center space-x-2">
+                        <span class="w-2 h-2 bg-primary-green rounded-full animate-pulse"></span>
+                        <p class="text-sm opacity-80">Breatha Motivation ✨</p>
+                        <span class="w-2 h-2 bg-primary-green rounded-full animate-pulse"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
+                <!-- Left Column -->
+                <div class="space-y-6 md:space-y-8">
+                    <!-- Achievements Section -->
+                    <div class="glass-effect rounded-3xl p-6 md:p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl md:text-2xl font-bold text-black flex items-center">
+                                <div class="bg-yellow-500 w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center mr-3 md:mr-4">
+                                    <i class="fas fa-trophy text-white text-lg md:text-xl"></i>
+                                </div>
+                                🏆 Achievements
+                            </h3>
+                            <div class="bg-primary-green text-white px-3 py-1 rounded-full text-xs md:text-sm font-bold">
+                                <span id="achievementCount">0</span>/7
+                            </div>
+                        </div>
+                        <div id="achievementsList" class="achievement-grid">
+                            <!-- Achievements will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Craving Tracker -->
+                    <div class="glass-effect rounded-3xl p-6 md:p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl md:text-2xl font-bold text-black flex items-center">
+                                <div class="bg-red-500 w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center mr-3 md:mr-4">
+                                    <i class="fas fa-brain text-white text-lg md:text-xl"></i>
+                                </div>
+                                🧠 Craving Control
+                            </h3>
+                        </div>
+                        <div class="text-center mb-6">
+                            <div class="text-3xl md:text-4xl font-bold text-black mb-2" id="todaysCravings">0</div>
+                            <div class="text-sm text-gray-600">📊 Today's Cravings</div>
+                        </div>
+                        <div class="space-y-3">
+                            <button id="cravingBtn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-105">
+                                <i class="fas fa-exclamation-circle mr-2"></i>😰 I'm Having a Craving!
+                            </button>
+                            <button id="breathingBtn" class="w-full bg-primary-green hover:bg-dark-green text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-105">
+                                <i class="fas fa-wind mr-2"></i>🌬️ Start Breathing Exercise
+                            </button>
+                        </div>
+                        <div id="cravingTimer" class="hidden mt-4 p-4 bg-primary-green/10 rounded-xl text-center">
+                            <div class="text-lg font-bold text-primary-green mb-2">⏰ Craving Timer</div>
+                            <div id="timerDisplay" class="text-2xl font-bold text-black mb-3">5:00</div>
+                            <div class="text-sm text-gray-600">Wait it out! Cravings typically last 3-5 minutes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-6 md:space-y-8">
+                    <!-- Health Recovery Timeline -->
+                    <div class="glass-effect rounded-3xl p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-red-400 w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center mr-3 md:mr-4">
+                                <i class="fas fa-heartbeat text-white text-lg md:text-xl pulse-animation"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-black">❤️ Health Recovery</h3>
+                        </div>
+                        <div id="healthMilestones" class="space-y-3 md:space-y-4 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-primary-green scrollbar-track-gray-100">
+                            <!-- Health milestones will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Daily Goals & Emergency Support -->
+                    <div class="glass-effect rounded-3xl p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-primary-green w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center mr-3 md:mr-4">
+                                <i class="fas fa-bullseye text-white text-lg md:text-xl"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-black">🎯 Daily Goals</h3>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center justify-between p-3 bg-white/50 rounded-xl">
+                                <span class="text-sm font-medium">🚶 Take a 10-min walk</span>
+                                <button class="goal-check w-6 h-6 rounded-full border-2 border-primary-green flex items-center justify-center hover:bg-primary-green hover:text-white transition-all">
+                                    <i class="fas fa-check text-xs"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-white/50 rounded-xl">
+                                <span class="text-sm font-medium">💧 Drink 8 glasses of water</span>
+                                <button class="goal-check w-6 h-6 rounded-full border-2 border-primary-green flex items-center justify-center hover:bg-primary-green hover:text-white transition-all">
+                                    <i class="fas fa-check text-xs"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-white/50 rounded-xl">
+                                <span class="text-sm font-medium">🧘 Practice deep breathing</span>
+                                <button class="goal-check w-6 h-6 rounded-full border-2 border-primary-green flex items-center justify-center hover:bg-primary-green hover:text-white transition-all">
+                                    <i class="fas fa-check text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Emergency Support -->
+                        <div class="border-t pt-6">
+                            <h4 class="text-lg font-bold text-black mb-4 flex items-center">
+                                <i class="fas fa-phone text-red-500 mr-2"></i>🆘 Emergency Support
+                            </h4>
+                            <div class="space-y-2">
+                                <button class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all text-sm" onclick="window.open('tel:1800-11-0031', '_blank')">
+                                    📞 National Tobacco Quitline (India)
+                                </button>
+                                <button id="callSupportBtn" class="w-full bg-primary-green hover:bg-dark-green text-white font-bold py-2 px-4 rounded-lg transition-all text-sm">
+                                    👥 Call a Friend
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Statistics -->
+            <div class="glass-effect rounded-3xl p-6 md:p-8 mt-6 md:mt-8">
+                <h3 class="text-xl md:text-2xl font-bold text-black mb-6 flex items-center">
+                    <div class="bg-primary-green w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center mr-3 md:mr-4">
+                        <i class="fas fa-chart-bar text-white text-lg md:text-xl"></i>
+                    </div>
+                    📊 Your Progress Stats
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-white/50 rounded-xl">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-green" id="longestStreak">0</div>
+                        <div class="text-xs md:text-sm text-gray-600">🏅 Longest Streak</div>
+                    </div>
+                    <div class="text-center p-4 bg-white/50 rounded-xl">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-green" id="totalCravings">0</div>
+                        <div class="text-xs md:text-sm text-gray-600">💪 Cravings Defeated</div>
+                    </div>
+                    <div class="text-center p-4 bg-white/50 rounded-xl">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-green" id="xpEarned">0</div>
+                        <div class="text-xs md:text-sm text-gray-600">⭐ Total XP Earned</div>
+                    </div>
+                    <div class="text-center p-4 bg-white/50 rounded-xl">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-green" id="lifeExtended">0</div>
+                        <div class="text-xs md:text-sm text-gray-600">⏳ Life Extended (hrs)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 backdrop-blur-sm">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="glass-effect rounded-2xl p-8 w-full max-w-md transform scale-100 transition-all">
+                    <div class="flex justify-between items-center mb-8">
+                        <h3 class="text-2xl font-bold text-black flex items-center">
+                            <i class="fas fa-cog text-primary-green mr-3"></i>⚙️ Settings
+                        </h3>
+                        <button id="closeSettings" class="text-gray-600 hover:text-black transition-colors transform hover:scale-110">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-black mb-3">🚬 Cigarettes per day (before quitting)</label>
+                            <input type="number" id="cigarettesPerDay" class="w-full p-4 border-2 border-primary-green/20 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white/90 backdrop-blur text-black" value="20">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-black mb-3">💰 Cost per pack (₹)</label>
+                            <input type="number" id="costPerPack" class="w-full p-4 border-2 border-primary-green/20 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white/90 backdrop-blur text-black" value="150" step="0.01">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-black mb-3">📦 Cigarettes per pack</label>
+                            <input type="number" id="cigarettesPerPack" class="w-full p-4 border-2 border-primary-green/20 rounded-xl focus:ring-2 focus:ring-primary-green focus:border-transparent bg-white/90 backdrop-blur text-black" value="20">
+                        </div>
+                        
+                        <div class="pt-6 border-t border-primary-green/20">
+                            <button id="saveSettings" class="w-full bg-primary-green hover:bg-dark-green text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-save mr-2"></i>✅ Save Settings
+                            </button>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button id="resetProgress" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300">
+                                <i class="fas fa-undo mr-2"></i>🔄 Reset All Progress
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // App State
+        let appState = {
+            startDate: null,
+            cigarettesPerDay: 20,
+            costPerPack: 150, // Changed to Indian Rupees
+            cigarettesPerPack: 20,
+            yearsSmoking: 5,
+            userName: '',
+            level: 1,
+            xp: 0,
+            achievements: [],
+            isStarted: false,
+            hasCompletedSetup: false,
+            cravings: [], // New: Track cravings
+            emergencyContacts: [], // New: Emergency support contacts
+            dailyGoals: [], // New: Daily goals
+            streakRecord: 0, // New: Longest streak record
+            todaysCravings: 0, // New: Today's craving count
+            lastCravingTime: null, // New: Last craving timestamp
+            smokeFreeReminders: true, // New: Reminder settings
+            darkMode: false, // New: Dark mode toggle
+            language: 'en' // New: Language preference
+        };
+
+        // Achievements Configuration
+        const achievements = [
+            { id: 'first_day', name: 'First Day', description: '24 hours smoke-free', icon: 'fa-calendar', days: 1, xp: 50 },
+            { id: 'first_week', name: 'One Week', description: '7 days smoke-free', icon: 'fa-trophy', days: 7, xp: 200 },
+            { id: 'two_weeks', name: 'Two Weeks', description: '14 days smoke-free', icon: 'fa-medal', days: 14, xp: 300 },
+            { id: 'one_month', name: 'One Month', description: '30 days smoke-free', icon: 'fa-crown', days: 30, xp: 500 },
+            { id: 'three_months', name: 'Three Months', description: '90 days smoke-free', icon: 'fa-star', days: 90, xp: 1000 },
+            { id: 'six_months', name: 'Half Year', description: '180 days smoke-free', icon: 'fa-gem', days: 180, xp: 2000 },
+            { id: 'one_year', name: 'One Year', description: '365 days smoke-free', icon: 'fa-diamond', days: 365, xp: 5000 }
+        ];
+
+        // Motivational Quotes (Enhanced with 20+ quotes)
+        const motivationalQuotes = [
+            "Every day smoke-free is a victory! 🎆",
+            "Your lungs are thanking you right now. 🍃",
+            "You're stronger than any craving. 💪",
+            "Each breath is fresher without smoke. 🌬️",
+            "Your health is your greatest wealth. 💰",
+            "You're not just quitting smoking, you're choosing life. ❤️",
+            "Every cigarette not smoked is money in your pocket. 💵",
+            "Your future self will thank you for this decision. 🙏",
+            "You have the power to change your life. ⚡",
+            "Breathing freely never felt so good! 🌈",
+            "Champions don't quit, they just change direction. 🏆",
+            "Your willpower grows stronger each day. 🌱",
+            "Freedom tastes better than any cigarette. 🎉",
+            "You're writing a new chapter of your life. 📚",
+            "Every craving overcome makes you stronger. 🔥",
+            "Your family is proud of your courage. 👨‍👩‍👧‍👦",
+            "Clean air, clear mind, bright future! ✨",
+            "You're an inspiration to others. 🌟",
+            "Every smoke-free hour is a small miracle. 🥰",
+            "Your taste buds are celebrating! 🍰",
+            "You're proving that change is possible. 🦅",
+            "Your journey inspires hope in others. 🌈",
+            "Healthy choices lead to a healthy life. 🍎",
+            "You're building a smoke-free legacy. 🏰",
+            "Every day clean is a day closer to your goals. 🎯"
+        ];
+
+        // Health Milestones (Enhanced with 20+ milestones)
+        const healthMilestones = [
+            { hours: 1, title: "Carbon monoxide levels start dropping 🌬️", achieved: false },
+            { hours: 8, title: "Nicotine levels reduce by 93% 📊", achieved: false },
+            { hours: 12, title: "Blood oxygen levels normalize ❤️", achieved: false },
+            { hours: 24, title: "Carbon monoxide completely eliminated 🍃", achieved: false },
+            { hours: 48, title: "Nerve endings start regenerating 🧠", achieved: false },
+            { hours: 72, title: "Breathing becomes easier 🌬️", achieved: false },
+            { hours: 24*7, title: "Taste and smell improve dramatically 🍰", achieved: false },
+            { hours: 24*14, title: "Circulation improves significantly 🌊", achieved: false },
+            { hours: 24*21, title: "Immune system starts strengthening 🛡️", achieved: false },
+            { hours: 24*30, title: "Lung function increases up to 30% 🍃", achieved: false },
+            { hours: 24*45, title: "Coughing and shortness of breath decrease 🌈", achieved: false },
+            { hours: 24*60, title: "Heart attack risk starts declining ❤️", achieved: false },
+            { hours: 24*90, title: "Lung infection risk reduces 🌱", achieved: false },
+            { hours: 24*120, title: "Blood pressure normalizes 🌡️", achieved: false },
+            { hours: 24*180, title: "Heart disease risk reduces by 50% 💪", achieved: false },
+            { hours: 24*365, title: "Stroke risk equals non-smoker 🎆", achieved: false },
+            { hours: 24*365*2, title: "Heart disease risk drops significantly ❤️", achieved: false },
+            { hours: 24*365*5, title: "Lung cancer risk reduces by 50% 🌱", achieved: false },
+            { hours: 24*365*10, title: "Lung cancer risk equals non-smoker 🎉", achieved: false },
+            { hours: 24*365*15, title: "Heart disease risk equals non-smoker 🏆", achieved: false },
+            { hours: 24*365*20, title: "All health risks normalized ✨", achieved: false }
+        ];
+
+        // Load state from localStorage
+        function loadState() {
+            const saved = localStorage.getItem('breathaState');
+            if (saved) {
+                appState = { ...appState, ...JSON.parse(saved) };
+                if (appState.startDate) {
+                    appState.startDate = new Date(appState.startDate);
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            localStorage.setItem('breathaState', JSON.stringify(appState));
+        }
+
+        // Calculate days smoke-free
+        function getDaysSmokeFree() {
+            if (!appState.startDate) return 0;
+            const now = new Date();
+            const diffTime = Math.abs(now - appState.startDate);
+            return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        }
+
+        // Calculate hours smoke-free
+        function getHoursSmokeFree() {
+            if (!appState.startDate) return 0;
+            const now = new Date();
+            const diffTime = Math.abs(now - appState.startDate);
+            return Math.floor(diffTime / (1000 * 60 * 60));
+        }
+
+        // Calculate cigarettes avoided
+        function getCigarettesAvoided() {
+            return getDaysSmokeFree() * appState.cigarettesPerDay;
+        }
+
+        // Calculate money saved
+        function getMoneySaved() {
+            const cigarettesAvoided = getCigarettesAvoided();
+            const costPerCigarette = appState.costPerPack / appState.cigarettesPerPack;
+            return (cigarettesAvoided * costPerCigarette).toFixed(2);
+        }
+
+        // Calculate health score
+        function getHealthScore() {
+            const days = getDaysSmokeFree();
+            return Math.min(100, Math.floor(100 + (days * 2))); // Improves by 2 points per day
+        }
+
+        // Calculate level and XP
+        function calculateLevel() {
+            let level = 1;
+            let totalXP = appState.xp;
+            
+            // Add XP for days smoke-free (10 XP per day)
+            totalXP += getDaysSmokeFree() * 10;
+            
+            // Calculate level (100 XP per level, increasing by 50 each level)
+            let xpRequired = 100;
+            let currentLevelXP = totalXP;
+            
+            while (currentLevelXP >= xpRequired) {
+                currentLevelXP -= xpRequired;
+                level++;
+                xpRequired += 50;
+            }
+            
+            return {
+                level,
+                currentXP: currentLevelXP,
+                xpRequired,
+                totalXP
+            };
+        }
+
+        // Check and award achievements
+        function checkAchievements() {
+            const days = getDaysSmokeFree();
+            let newAchievements = [];
+            
+            achievements.forEach(achievement => {
+                if (days >= achievement.days && !appState.achievements.includes(achievement.id)) {
+                    appState.achievements.push(achievement.id);
+                    appState.xp += achievement.xp;
+                    newAchievements.push(achievement);
+                }
+            });
+            
+            return newAchievements;
+        }
+
+        // Update dashboard
+        function updateDashboard() {
+            const days = getDaysSmokeFree();
+            const levelInfo = calculateLevel();
+            
+            // Update level info
+            document.getElementById('userLevel').textContent = levelInfo.level;
+            document.getElementById('streakDays').textContent = days;
+            document.getElementById('levelXP').textContent = levelInfo.currentXP;
+            document.getElementById('levelXPRequired').textContent = levelInfo.xpRequired;
+            
+            // Update progress bar and circle
+            const progressPercent = (levelInfo.currentXP / levelInfo.xpRequired) * 100;
+            document.getElementById('levelProgress').style.width = `${progressPercent}%`;
+            
+            // Update circular progress
+            const circle = document.getElementById('progressCircle');
+            const circumference = 2 * Math.PI * 45; // radius = 45
+            const offset = circumference - (days / 365 * circumference); // Progress based on year goal
+            circle.style.strokeDashoffset = offset;
+            
+            // Update stats
+            document.getElementById('daysFree').textContent = days;
+            document.getElementById('cigarettesAvoided').textContent = getCigarettesAvoided();
+            document.getElementById('moneySaved').textContent = getMoneySaved();
+            document.getElementById('healthScore').textContent = getHealthScore();
+            
+            // Update new features
+            updateCravingStats();
+            updateProgressStats();
+            
+            // Update motivational quote
+            const quote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+            document.getElementById('motivationalQuote').textContent = quote;
+            
+            // Update achievements
+            updateAchievements();
+            
+            // Update health milestones
+            updateHealthMilestones();
+        }
+
+        // Update achievements display
+        function updateAchievements() {
+            const container = document.getElementById('achievementsList');
+            const countElement = document.getElementById('achievementCount');
+            container.innerHTML = '';
+            
+            let earnedCount = 0;
+            
+            achievements.forEach(achievement => {
+                const isEarned = appState.achievements.includes(achievement.id);
+                if (isEarned) earnedCount++;
+                
+                const div = document.createElement('div');
+                div.className = `achievement-card p-4 rounded-2xl text-center transition-all transform hover:scale-105 cursor-pointer ${
+                    isEarned 
+                        ? 'badge-glow text-white shadow-lg' 
+                        : 'bg-white/60 text-gray-500 border-2 border-gray-200 hover:border-primary-green/30'
+                }`;
+                
+                div.innerHTML = `
+                    <div class="relative mb-3">
+                        <div class="w-12 h-12 mx-auto rounded-full flex items-center justify-center ${
+                            isEarned ? 'bg-white/20' : 'bg-gray-100'
+                        }">
+                            <i class="fas ${achievement.icon} text-xl ${isEarned ? 'text-white' : 'text-gray-400'}"></i>
+                        </div>
+                        ${isEarned ? '<div class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center"><i class="fas fa-check text-xs text-black"></i></div>' : ''}
+                    </div>
+                    <div class="text-sm font-bold mb-1 leading-tight">${achievement.name}</div>
+                    <div class="text-xs opacity-80 leading-tight">${achievement.description}</div>
+                    ${isEarned ? '<div class="text-xs mt-2 bg-white/20 rounded-full px-2 py-1 inline-block">+' + achievement.xp + ' XP ✨</div>' : ''}
+                `;
+                
+                container.appendChild(div);
+            });
+            
+            // Update achievement count
+            if (countElement) {
+                countElement.textContent = earnedCount;
+            }
+        }
+
+        // Update health milestones
+        function updateHealthMilestones() {
+            const container = document.getElementById('healthMilestones');
+            const hours = getHoursSmokeFree();
+            
+            container.innerHTML = '';
+            
+            healthMilestones.forEach(milestone => {
+                const isAchieved = hours >= milestone.hours;
+                const div = document.createElement('div');
+                div.className = `flex items-center p-4 rounded-xl transition-all ${
+                    isAchieved ? 'bg-primary-green/20 text-primary-green border border-primary-green/30' : 'bg-white/10 text-gray-600 border border-gray-300'
+                }`;
+                
+                div.innerHTML = `
+                    <i class="fas ${isAchieved ? 'fa-check-circle' : 'fa-clock'} text-2xl mr-4 ${isAchieved ? 'text-primary-green' : 'text-gray-400'}"></i>
+                    <div>
+                        <div class="font-medium text-lg">${milestone.title}</div>
+                        <div class="text-sm opacity-70">
+                            ${isAchieved ? 'Achieved! 🎉✨' : `In ${Math.max(0, milestone.hours - hours)} hours ⏰`}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+
+        // Start journey
+        function startJourney() {
+            appState.startDate = new Date();
+            appState.isStarted = true;
+            saveState();
+            
+            // Hide landing page and show dashboard
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('mainNav').classList.remove('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            // Update welcome message
+            const welcomeEl = document.getElementById('welcomeUser');
+            if (appState.userName) {
+                welcomeEl.textContent = `Welcome back, ${appState.userName}! 😄`;
+            }
+            
+            updateDashboard();
+            
+            // Check for new achievements
+            const newAchievements = checkAchievements();
+            if (newAchievements.length > 0) {
+                saveState();
+                updateDashboard();
+            }
+        }
+        
+        // Show setup wizard
+        function showSetupWizard() {
+            document.getElementById('setupWizard').classList.remove('hidden');
+        }
+        
+        // Hide setup wizard
+        function hideSetupWizard() {
+            document.getElementById('setupWizard').classList.add('hidden');
+        }
+        
+        // Complete setup
+        function completeSetup() {
+            // Get values from setup form
+            const cigarettesPerDay = parseInt(document.getElementById('setupCigarettesPerDay').value);
+            const costPerPack = parseFloat(document.getElementById('setupCostPerPack').value);
+            const cigarettesPerPack = parseInt(document.getElementById('setupCigarettesPerPack').value);
+            const yearsSmoking = parseInt(document.getElementById('setupYearsSmoking').value);
+            const userName = document.getElementById('setupUserName').value.trim();
+            
+            // Validate inputs
+            if (!cigarettesPerDay || !costPerPack || !cigarettesPerPack) {
+                alert('Please fill in all required fields! 📝');
+                return;
+            }
+            
+            // Save to app state
+            appState.cigarettesPerDay = cigarettesPerDay;
+            appState.costPerPack = costPerPack;
+            appState.cigarettesPerPack = cigarettesPerPack;
+            appState.yearsSmoking = yearsSmoking || 1;
+            appState.userName = userName;
+            appState.hasCompletedSetup = true;
+            
+            hideSetupWizard();
+            startJourney();
+        }
+
+        // Show settings modal
+        function showSettings() {
+            document.getElementById('cigarettesPerDay').value = appState.cigarettesPerDay;
+            document.getElementById('costPerPack').value = appState.costPerPack;
+            document.getElementById('cigarettesPerPack').value = appState.cigarettesPerPack;
+            document.getElementById('settingsModal').classList.remove('hidden');
+        }
+
+        // Hide settings modal
+        function hideSettings() {
+            document.getElementById('settingsModal').classList.add('hidden');
+        }
+
+        // Save settings
+        function saveSettings() {
+            appState.cigarettesPerDay = parseInt(document.getElementById('cigarettesPerDay').value);
+            appState.costPerPack = parseFloat(document.getElementById('costPerPack').value);
+            appState.cigarettesPerPack = parseInt(document.getElementById('cigarettesPerPack').value);
+            
+            saveState();
+            updateDashboard();
+            hideSettings();
+            
+            // Show success message
+            alert('Settings saved successfully! ✅✨');
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone. 🤔⚠️')) {
+                localStorage.removeItem('breathaState');
+                location.reload();
+            }
+        }
+
+        // NEW FEATURES
+
+        // Craving tracking
+        function recordCraving() {
+            const now = new Date();
+            const today = now.toDateString();
+            
+            // Update today's count
+            const lastCravingDate = appState.lastCravingTime ? new Date(appState.lastCravingTime).toDateString() : null;
+            if (lastCravingDate !== today) {
+                appState.todaysCravings = 0;
+            }
+            
+            appState.todaysCravings++;
+            appState.lastCravingTime = now;
+            appState.cravings.push({
+                timestamp: now,
+                defeated: false
+            });
+            
+            saveState();
+            updateCravingStats();
+            
+            // Start craving timer
+            startCravingTimer();
+            
+            // Award XP for tracking craving
+            appState.xp += 5;
+            saveState();
+        }
+
+        function startCravingTimer() {
+            const timer = document.getElementById('cravingTimer');
+            const display = document.getElementById('timerDisplay');
+            timer.classList.remove('hidden');
+            
+            let timeLeft = 300; // 5 minutes
+            
+            const interval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                display.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                timeLeft--;
+                
+                if (timeLeft < 0) {
+                    clearInterval(interval);
+                    timer.classList.add('hidden');
+                    
+                    // Mark craving as defeated
+                    if (appState.cravings.length > 0) {
+                        appState.cravings[appState.cravings.length - 1].defeated = true;
+                        appState.xp += 10; // Bonus XP for defeating craving
+                        saveState();
+                        updateCravingStats();
+                        
+                        alert('🎉 Congratulations! You defeated the craving! +10 XP ✨');
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateCravingStats() {
+            const today = new Date().toDateString();
+            const todayCount = appState.cravings.filter(c => 
+                new Date(c.timestamp).toDateString() === today
+            ).length;
+            
+            document.getElementById('todaysCravings').textContent = todayCount;
+        }
+
+        function updateProgressStats() {
+            // Update longest streak
+            const currentStreak = getDaysSmokeFree();
+            if (currentStreak > appState.streakRecord) {
+                appState.streakRecord = currentStreak;
+                saveState();
+            }
+            document.getElementById('longestStreak').textContent = appState.streakRecord;
+            
+            // Update total cravings defeated
+            const defeatedCravings = appState.cravings.filter(c => c.defeated).length;
+            document.getElementById('totalCravings').textContent = defeatedCravings;
+            
+            // Update total XP
+            const totalXP = calculateLevel().totalXP;
+            document.getElementById('xpEarned').textContent = totalXP;
+            
+            // Calculate life extended (average 11 minutes per cigarette)
+            const minutesExtended = getCigarettesAvoided() * 11;
+            const hoursExtended = Math.floor(minutesExtended / 60);
+            document.getElementById('lifeExtended').textContent = hoursExtended;
+        }
+
+        // Breathing exercise
+        function startBreathingExercise() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="glass-effect rounded-3xl p-8 max-w-md w-full mx-4 text-center">
+                    <h3 class="text-2xl font-bold text-black mb-6">🌬️ Deep Breathing Exercise</h3>
+                    <div class="mb-6">
+                        <div id="breathingCircle" class="w-32 h-32 mx-auto bg-primary-green rounded-full flex items-center justify-center transition-all duration-4000">
+                            <div class="text-white font-bold text-lg" id="breathingText">Breathe In</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-6">Follow the circle. Breathe in as it expands, breathe out as it contracts.</div>
+                    <button id="stopBreathing" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-xl transition-all">
+                        Stop Exercise
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            let phase = 'in';
+            const circle = modal.querySelector('#breathingCircle');
+            const text = modal.querySelector('#breathingText');
+            
+            const breathingInterval = setInterval(() => {
+                if (phase === 'in') {
+                    circle.style.transform = 'scale(1.5)';
+                    text.textContent = 'Breathe In';
+                    phase = 'out';
+                } else {
+                    circle.style.transform = 'scale(1)';
+                    text.textContent = 'Breathe Out';
+                    phase = 'in';
+                }
+            }, 4000);
+            
+            modal.querySelector('#stopBreathing').addEventListener('click', () => {
+                clearInterval(breathingInterval);
+                document.body.removeChild(modal);
+                appState.xp += 5; // Award XP for breathing exercise
+                saveState();
+                alert('🌬️ Great job! You completed a breathing exercise. +5 XP ✨');
+            });
+        }
+
+        // Goal completion
+        function setupGoalTracking() {
+            const goalButtons = document.querySelectorAll('.goal-check');
+            goalButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    if (button.classList.contains('bg-primary-green')) {
+                        // Uncomplete goal
+                        button.classList.remove('bg-primary-green', 'text-white');
+                        appState.xp = Math.max(0, appState.xp - 3);
+                    } else {
+                        // Complete goal
+                        button.classList.add('bg-primary-green', 'text-white');
+                        appState.xp += 3;
+                        
+                        // Show completion animation
+                        button.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            button.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                    saveState();
+                    updateDashboard();
+                });
+            });
+        }
+
+        // Emergency support
+        function callSupport() {
+            const contacts = [
+                'A trusted friend or family member',
+                'Your doctor or counselor',
+                'Quitline: 1800-11-0031',
+                'Emergency: 102'
+            ];
+            
+            const contact = contacts[Math.floor(Math.random() * contacts.length)];
+            alert(`📞 Remember: You can always reach out to ${contact} for support! You're not alone in this journey. 💪❤️`);
+        }
+
+        // Initialize app
+        function init() {
+            loadState();
+            
+            // Check if user has already started and has data
+            if (appState.isStarted && appState.startDate && appState.hasCompletedSetup) {
+                // Show dashboard directly
+                document.getElementById('landingPage').classList.add('hidden');
+                document.getElementById('mainNav').classList.remove('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                
+                // Update welcome message
+                const welcomeEl = document.getElementById('welcomeUser');
+                if (appState.userName) {
+                    welcomeEl.textContent = `Welcome back, ${appState.userName}! 😄`;
+                }
+                
+                updateDashboard();
+                setupGoalTracking();
+            }
+            
+            // Event listeners
+            document.getElementById('startJourneyBtn').addEventListener('click', showSetupWizard);
+            document.getElementById('completeSetup').addEventListener('click', completeSetup);
+            document.getElementById('cancelSetup').addEventListener('click', hideSetupWizard);
+            document.getElementById('settingsBtn').addEventListener('click', showSettings);
+            document.getElementById('closeSettings').addEventListener('click', hideSettings);
+            document.getElementById('saveSettings').addEventListener('click', saveSettings);
+            document.getElementById('resetProgress').addEventListener('click', resetProgress);
+            
+            // New feature event listeners
+            document.getElementById('cravingBtn').addEventListener('click', recordCraving);
+            document.getElementById('breathingBtn').addEventListener('click', startBreathingExercise);
+            document.getElementById('callSupportBtn').addEventListener('click', callSupport);
+            
+            // Close modals when clicking outside
+            document.getElementById('settingsModal').addEventListener('click', (e) => {
+                if (e.target.id === 'settingsModal') {
+                    hideSettings();
+                }
+            });
+            
+            document.getElementById('setupWizard').addEventListener('click', (e) => {
+                if (e.target.id === 'setupWizard') {
+                    hideSetupWizard();
+                }
+            });
+            
+            // Update dashboard every minute if started
+            if (appState.isStarted) {
+                setInterval(() => {
+                    updateDashboard();
+                    const newAchievements = checkAchievements();
+                    if (newAchievements.length > 0) {
+                        saveState();
+                        updateDashboard();
+                    }
+                }, 60000);
+            }
+        }
+
+        // Start the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
