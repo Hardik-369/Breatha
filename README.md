@@ -72,10 +72,9 @@
 ### **Installation**
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/breatha.git
-
+git clone https://github.com/Hardik-369/Breatha.git
 # Navigate to directory
-cd breatha
+cd Breatha
 
 # Open in browser (no build process required!)
 open index.html
@@ -219,5 +218,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made with ❤️ for a smoke-free world**
+
 
 *Transform your quit-smoking journey into an engaging game. Start your smoke-free adventure today!*
